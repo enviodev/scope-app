@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <BannerSunset />
     <AppHeader />
     <!-- eslint-disable-next-line vue/no-undef-components -->
     <NuxtPage />
