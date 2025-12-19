@@ -1,4 +1,3 @@
-import { alchemy } from 'evm-providers';
 import { Address, PublicClient, createPublicClient, http } from 'viem';
 
 import erc20Abi from '@/abi/erc20.js';
@@ -8,16 +7,13 @@ import {
   BASE,
   ETHEREUM,
   getChainData,
-  MODE,
+  getChainName,
+  getRpcUrl,
   OPTIMISM,
   POLYGON,
-  CELO,
-  MEGAETH_TESTNET,
 } from './chains.js';
 import type { ChainId } from './chains.js';
 import { type Log } from './db.js';
-
-const alchemyKey = process.env.ALCHEMY_KEY as string;
 
 interface Erc20Metadata {
   name: string | null;
@@ -26,25 +22,17 @@ interface Erc20Metadata {
 }
 
 function getClient(chain: ChainId): PublicClient | null {
-  function getEndpointUrl(chain: ChainId): string {
-    switch (chain) {
-      case MODE:
-      case CELO:
-      case MEGAETH_TESTNET: {
-        const chainData = getChainData(chain);
-        return chainData.rpcUrls.default.http[0] as string;
-      }
-      default:
-        return alchemy(chain, alchemyKey);
-    }
-  }
-
   const chainData = getChainData(chain);
   if (!chainData) {
     return null;
   }
-  const rpcUrl = getEndpointUrl(chain);
+
+  const rpcUrl = getRpcUrl(chain);
   if (!rpcUrl) {
+    console.warn(
+      `No RPC URL configured for ${getChainName(chain)} (${chain}). ` +
+        `Set RPC_${chain} in your .env.local file.`,
+    );
     return null;
   }
 

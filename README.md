@@ -22,11 +22,36 @@ The label registry. Stores and generates labels for known addresses (protocols, 
 
 ### indexer
 
-An indexer for ERC-4337 events. Built with Envio HyperIndex. Indexes UserOperationEvent and AccountDeployed events from EntryPoint contracts across multiple chains.
+An indexer for ERC-4337 events. Built with Envio HyperIndex. Indexes UserOperationEvent and AccountDeployed events from EntryPoint contracts across multiple chains. Deployed using Envio's hosted service.
 
-## Development
+## Local Development
 
-Each service has its own README with setup instructions. See the respective directories for details.
+### Prerequisites
+
+- Docker
+- Bun
+- pnpm (for indexer)
+
+### Database Setup
+
+Start PostgreSQL and set up the registry:
+
+```
+make setup
+```
+
+This will:
+1. Start a PostgreSQL container
+2. Apply database migrations
+3. Generate labels
+
+Other commands:
+
+```
+make db-start   # Start PostgreSQL
+make db-stop    # Stop PostgreSQL
+make db-reset   # Stop and remove all data
+```
 
 ## License
 
