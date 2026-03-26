@@ -10,7 +10,7 @@ Originally developed by [destiner](https://github.com/destiner). Now maintained 
 
 ## What is Scope?
 
-Scope is an account abstraction-focused block explorer that lets you explore blocks, transactions, addresses, and ERC-4337 user operations across multiple chains. The indexer powering it is built with Envio HyperIndex and deployed on Envio's hosted service.
+Scope is an account abstraction-focused block explorer that lets you explore blocks, transactions, addresses, and ERC-4337 user operations across multiple chains. The indexer powering it is built with Envio HyperIndex, deployed on Envio's hosted service, and indexes `UserOperationEvent` and `AccountDeployed` events from EntryPoint contracts.
 
 ## Repo Structure
 
